@@ -6,6 +6,12 @@ import java.util.Objects;
 public class Node {
     private final Integer steps;
     private final int[][] board;
+
+    public Node getParent() {
+        return parent;
+    }
+
+    private final Node parent;
     private final Integer x;
     private final Integer y;
 
@@ -29,13 +35,14 @@ public class Node {
         return steps;
     }
 
-    public Node(int[][] board, Integer x, Integer y, Integer steps) {
+    public Node(int[][] board, Integer x, Integer y, Integer steps, Node parent) {
         this.board = new int[board.length][board[0].length];
         for (int i = 0; i < board.length; i++) {
             this.board[i] = board[i].clone();
         }
         this.x = x;
         this.y = y;
+        this.parent = parent;
         this.steps = steps;
     }
 

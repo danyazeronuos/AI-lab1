@@ -21,17 +21,34 @@ public class Main {
         };
 
 
-        Node node = new Node(start, 0, 0, 0);
-        var resultDeep = findWithDeepSearch(node);
+        Node node = new Node(start, 0, 0, 0, null);
         var resultGreedy = findWithGreedySearch(node);
-        resultDeep.ifPresent(element -> {
-            System.out.println(element.getSteps());
-            System.out.println(Arrays.deepToString(element.getBoard()));
-        });
+
         resultGreedy.ifPresent(element -> {
             System.out.println(element.getSteps());
             System.out.println(Arrays.deepToString(element.getBoard()));
         });
+
+        printHistory(resultGreedy);
+//        var resultDeep = findWithDeepSearch(node);
+/*        resultDeep.ifPresent(element -> {
+            System.out.println(element.getSteps());
+            System.out.println(Arrays.deepToString(element.getBoard()));
+        });*/
+    }
+
+    private static void printHistory(Optional<Node> resultGreedy) {
+        List<Node> history = new ArrayList<>();
+        var resultNode = resultGreedy.orElse(null);
+        while (resultNode.getParent() != null) {
+            history.add(resultNode);
+            resultNode = resultNode.getParent();
+        }
+        history = history.reversed();
+
+        for (Node n : history) {
+            System.out.println(n);
+        }
     }
 
     private static Optional<Node> findWithGreedySearch(Node root) {

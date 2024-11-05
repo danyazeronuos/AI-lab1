@@ -12,6 +12,6 @@ public class UpdateNode implements BiFunction<Position, Node, Node> {
         }
         newBoard[node.getX()][node.getY()] = newBoard[position.x()][position.y()];
         newBoard[position.x()][position.y()] = 0;
-        return new Node(newBoard, position.x(), position.y(), node.getSteps()+1);
+        return new Node(newBoard, position.x(), position.y(), node.getSteps()+1, node);
     }
 }
